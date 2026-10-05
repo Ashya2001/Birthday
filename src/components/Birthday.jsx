@@ -1,393 +1,445 @@
 import React, { useEffect, useState } from "react";
 import {
-  Cake,
-  Gift,
   Heart,
   Sparkles,
   Star,
-  Music,
-  PartyPopper,
+  PawPrint,
+  Cat,
+  Moon,
+  Quote,
   ArrowDown,
+  Smile,
+  ShieldCheck,
+  Gem,
+  WandSparkles,
 } from "lucide-react";
 
 import "./Birthday.css";
 
-// =========================
-// CHANGE THESE TWO NAMES
-// =========================
-const FRIEND_NAME = "Advika";
+const FRIEND_NAME = "Inaya";
+const NICKNAME = "Billi";
 const YOUR_NAME = "Ashish";
 
-// =========================
-// CONFETTI
-// =========================
-function Confetti({ active }) {
-  if (!active) return null;
+function FloatingBilli() {
+  const items = [
+    "billi 🐱",
+    "hehe",
+    "cutie",
+    "✨",
+    "meri billi",
+    "🤍",
+    "hehehe",
+    "🐾",
+    "special",
+    "🌙",
+  ];
 
   return (
-    <div className="confetti-container">
-      {Array.from({ length: 70 }).map((_, i) => (
+    <div className="billi-particles">
+      {Array.from({ length: 20 }).map((_, index) => (
         <span
-          key={i}
-          className="confetti"
+          key={index}
+          className="billi-particle"
           style={{
             left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 0.5}s`,
-            animationDuration: `${2.5 + Math.random() * 2}s`,
-            backgroundColor: [
-              "#ff4f91",
-              "#ffd166",
-              "#9b5de5",
-              "#00f5d4",
-              "#ffffff",
-            ][i % 5],
+            animationDelay: `${Math.random() * 9}s`,
+            animationDuration: `${8 + Math.random() * 8}s`,
           }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// =========================
-// FLOATING HEARTS
-// =========================
-function FloatingHearts() {
-  return (
-    <div className="floating-hearts">
-      {Array.from({ length: 18 }).map((_, i) => (
-        <Heart
-          key={i}
-          className="floating-heart"
-          fill="currentColor"
-          style={{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 7}s`,
-            animationDuration: `${5 + Math.random() * 5}s`,
-            fontSize: `${12 + Math.random() * 18}px`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-// =========================
-// BIRTHDAY CAKE
-// =========================
-function BirthdayCake({ onBlow }) {
-  const [lit, setLit] = useState(true);
-
-  const blowCandle = () => {
-    if (!lit) return;
-
-    setLit(false);
-    onBlow();
-  };
-
-  return (
-    <div className="cake-area">
-      <div className="cake-glow" />
-
-      <div className="cake">
-        {/* Cake bottom */}
-        <div className="cake-bottom" />
-
-        {/* Cake middle */}
-        <div className="cake-middle" />
-
-        {/* Cake top */}
-        <div className="cake-top">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-
-        {/* Candle */}
-        <button
-          className="candle"
-          onClick={blowCandle}
-          aria-label="Blow the birthday candle"
         >
-          <div className="candle-stick" />
+          {items[index % items.length]}
+        </span>
+      ))}
+    </div>
+  );
+}
 
-          {lit ? (
-            <div className="flame">
-              <div className="flame-inner" />
-            </div>
-          ) : (
-            <div className="smoke">
-              <i />
-              <i />
-              <i />
-            </div>
-          )}
-        </button>
+/* =========================
+   NAVBAR
+========================= */
+
+function Navbar() {
+  return (
+    <nav className="bf-nav">
+      <div className="bf-logo">
+        <span className="logo-heart">
+          <Heart size={16} fill="currentColor" />
+        </span>
+
+        <span>
+          just for <strong>{FRIEND_NAME}</strong>
+        </span>
       </div>
 
-      {lit ? (
-        <p className="blow-text">
-          Tap the candle & make a wish 🕯️
-        </p>
-      ) : (
-        <p className="wish-message">
-          ✨ Wish made! May all your dreams come true ✨
-        </p>
-      )}
-    </div>
+      <div className="billi-mini">
+        <Cat size={16} />
+        <span>{NICKNAME}</span>
+      </div>
+    </nav>
   );
 }
 
-// =========================
-// BIRTHDAY CARD
-// =========================
-function BirthdayCard({ onCelebrate }) {
-  return (
-    <section className="hero-section">
-      <div className="hero-card">
-        <div className="card-shine" />
+/* =========================
+   HERO
+========================= */
 
-        {/* Top label */}
-        <div className="top-label">
-          <Sparkles size={16} />
-          <span>A SPECIAL DAY</span>
-          <Sparkles size={16} />
+function Hero() {
+  const [showLine, setShowLine] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLine(true);
+    }, 1300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <section className="bf-hero">
+      <div className="hero-orb orb-one" />
+      <div className="hero-orb orb-two" />
+
+      <div className="hero-content">
+        <div className="eyebrow">
+          <span />
+          <Sparkles size={13} />
+          <span>NOT A BIG THING</span>
+          <Sparkles size={13} />
+          <span />
         </div>
 
-        {/* Crown */}
-        <div className="mini-crown">👑</div>
+        <div className="floating-cat">
+          🐱
+        </div>
 
-        {/* Heading */}
-        <h1>
-          Happy Birthday
-          <span>{FRIEND_NAME}</span>
-        </h1>
-
-        {/* Description */}
-        <p className="hero-description">
-          Today isn't just another day...
-          <br />
-          it's the day my amazing best friend was born. 💕
+        <p className="hero-small">
+          There is a person I call...
         </p>
 
-        {/* Cake */}
-        <BirthdayCake onBlow={onCelebrate} />
+        <h1>
+          My
+          <span>{NICKNAME}</span>
+        </h1>
 
-        {/* Celebrate button */}
-        <button
-          className="celebrate-btn"
-          onClick={onCelebrate}
-        >
-          <PartyPopper size={19} />
-          Celebrate 🎉
-          <Sparkles size={18} />
-        </button>
-
-        {/* Footer */}
-        <div className="made-with">
-          <Heart size={13} fill="currentColor" />
-
-          <span>
-            Made specially for my best friend
-          </span>
-
-          <Heart size={13} fill="currentColor" />
+        <div className="nickname-glow">
+          <div className="nickname-ring ring-one" />
+          <div className="nickname-ring ring-two" />
         </div>
+
+        <p className="hero-description">
+          And no, it's not because you're actually a cat. 😭
+          <br />
+          It's just one of those names that somehow
+          <strong> belongs to you.</strong>
+        </p>
+
+        {showLine && (
+          <div className="hero-reveal">
+            <Heart size={14} fill="currentColor" />
+
+            <span>
+              {FRIEND_NAME} — my favourite kind of chaos.
+            </span>
+
+            <Heart size={14} fill="currentColor" />
+          </div>
+        )}
+      </div>
+
+      <div className="hero-scroll">
+        <span>keep scrolling, billi</span>
+        <ArrowDown size={16} />
       </div>
     </section>
   );
 }
 
-// =========================
-// MEMORIES
-// =========================
-function Memories() {
-  const memories = [
+/* =========================
+   BILLI PERSONALITY
+========================= */
+
+function BilliTraits() {
+  const traits = [
     {
-      emoji: "😂",
-      title: "Endless Laughs",
+      number: "01",
+      icon: Smile,
+      title: "That Smile",
       text:
-        "Tumhare saath boring moment bhi somehow funny ban jaata hai.",
+        "Tumhari smile mein kuch toh hai. Normal day bhi thoda better feel hone lagta hai.",
     },
     {
-      emoji: "🤝",
-      title: "Always There",
+      number: "02",
+      icon: Sparkles,
+      title: "Your Energy",
       text:
-        "Good days ho ya bad days, ek dusre ka saath kabhi nahi chhoda.",
+        "Tumhari random baatein aur chhoti-chhoti harkatein hi toh tumhe tum banati hain.",
     },
     {
-      emoji: "💖",
-      title: "Best Memories",
+      number: "03",
+      icon: ShieldCheck,
+      title: "Your Heart",
       text:
-        "Har chhoti si memory bhi tumhare saath special lagti hai.",
+        "Tum jitni cute ho, usse zyada achhi tumhari nature hai. Aur ye cheez genuinely rare hai.",
+    },
+    {
+      number: "04",
+      icon: Gem,
+      title: "Simply You",
+      text:
+        "Sabse achhi baat ye hai ki tumhe kisi aur jaisa banne ki zarurat nahi. Tum already enough ho.",
     },
   ];
 
   return (
-    <section className="memories-section">
+    <section className="traits-section">
       <div className="section-heading">
-        <span>OUR LITTLE STORY</span>
+        <div className="section-kicker">
+          <PawPrint size={13} />
+          LITTLE THINGS
+        </div>
 
-        <h2>Why You're So Special 💗</h2>
+        <h2>
+          Things I secretly
+          <span>like about you.</span>
+        </h2>
 
         <p>
-          Some things about our friendship that I'll always cherish.
+          Okay... secretly nahi.
+          <br />
+          Ab toh openly bol raha hoon. 😌
         </p>
       </div>
 
-      <div className="memory-grid">
-        {memories.map((memory, index) => (
-          <div className="memory-card" key={index}>
-            <div className="memory-number">
-              0{index + 1}
-            </div>
+      <div className="traits-grid">
+        {traits.map((trait) => {
+          const Icon = trait.icon;
 
-            <div className="memory-icon">
-              {memory.emoji}
-            </div>
+          return (
+            <article className="trait-card" key={trait.number}>
+              <span className="trait-number">
+                {trait.number}
+              </span>
 
-            <h3>{memory.title}</h3>
+              <div className="trait-icon">
+                <Icon size={23} strokeWidth={1.7} />
+              </div>
 
-            <p>{memory.text}</p>
+              <h3>{trait.title}</h3>
 
-            <div className="memory-line" />
-          </div>
-        ))}
+              <p>{trait.text}</p>
+
+              <div className="trait-arrow">↗</div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
 }
 
-// =========================
-// FINAL WISH
-// =========================
-function FinalWish() {
+/* =========================
+   SPECIAL BILLI CARD
+========================= */
+
+function BilliCard() {
+  const [active, setActive] = useState(false);
+
   return (
-    <section className="final-section">
-      <div className="final-card">
-        <div className="stars">
-          <Star />
-          <Sparkles />
-          <Star />
+    <section className="billi-section">
+      <div className="billi-card">
+        <div className="billi-card-glow" />
+
+        <div className="billi-left">
+          <div className="billi-icon-large">
+            <Cat size={48} strokeWidth={1.3} />
+
+            <span className="spark spark-a">✦</span>
+            <span className="spark spark-b">✧</span>
+          </div>
         </div>
 
-        <Gift className="gift-icon" size={45} />
+        <div className="billi-right">
+          <div className="billi-label">
+            <WandSparkles size={14} />
+            <span>THE NICKNAME</span>
+          </div>
 
-        <h2>One Last Wish...</h2>
+          <h2>
+            Why
+            <span>“Billi”?</span>
+          </h2>
 
-        <p>
-          May this new year of your life bring you endless
-          happiness, beautiful memories, success, peace and
-          everything your heart wishes for.
-        </p>
+          <p>
+            Kyunki kuch nicknames explain nahi kiye jaate.
+            Bas kisi ek person ke liye naturally perfect lagte hain.
+          </p>
 
-        <div className="big-wish">
-          <span>Happy Birthday</span>
+          <p>
+            Aur tumhare case mein...
+            <strong> Billi just fits.</strong>
+          </p>
 
-          <strong>
-            {FRIEND_NAME} 💖
-          </strong>
+          <button
+            className={`billi-button ${active ? "active" : ""}`}
+            onClick={() => setActive(!active)}
+          >
+            {active ? "Okay okay, enough 😭" : "One more thing..."}
+          </button>
+
+          {active && (
+            <div className="hidden-message">
+              <Heart size={14} fill="currentColor" />
+              <span>
+                Tu genuinely bahut achhi hai, Billi.
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* =========================
+   FRIENDSHIP NOTE
+========================= */
+
+function PersonalNote() {
+  return (
+    <section className="personal-section">
+      <div className="paper-shadow" />
+
+      <div className="personal-card">
+        <div className="note-corner">♡</div>
+
+        <div className="note-heading">
+          <Moon size={15} />
+          <span>A NOTE FROM ASHISH</span>
+          <Moon size={15} />
         </div>
 
-        <div className="signature">
-          With lots of love,
-          <br />
+        <Quote className="quote-icon" size={28} />
 
+        <h2>
+          Billi, ek baat
+          <span>seriously.</span>
+        </h2>
+
+        <div className="letter">
+          <p>
+            Mujhe nahi pata main ye cheez normally kabhi bolta
+            ya nahi, but aaj bol deta hoon.
+          </p>
+
+          <p>
+            <strong>Tu mujhe achhi lagti hai.</strong>
+          </p>
+
+          <p>
+            Teri personality, tera nature, teri random baatein,
+            tera cute sa attitude aur woh bina reason wali
+            hasi... sab kuch apne aap mein special hai.
+          </p>
+
+          <p>
+            Tere saath friendship ko explain karne ke liye
+            koi fancy word nahi chahiye.
+            Bas itna kaafi hai ki
+            <strong> tu meri favourite people mein se hai.</strong>
+          </p>
+
+          <p>
+            Aur haan, kabhi kabhi irritate bhi karti hai...
+            but unfortunately,
+            <strong> meri Billi hai toh tolerate karna padega. 😭🐱</strong>
+          </p>
+        </div>
+
+        <div className="hand-sign">
+          <span>— with genuine affection</span>
           <strong>{YOUR_NAME}</strong>
         </div>
-
-        <div className="heart-row">
-          ❤️ ❤️ ❤️
-        </div>
       </div>
     </section>
   );
 }
 
-// =========================
-// MAIN BIRTHDAY COMPONENT
-// =========================
-export default function Birthday() {
-  const [celebrate, setCelebrate] = useState(false);
-  const [musicOn, setMusicOn] = useState(false);
+/* =========================
+   FINAL
+========================= */
 
-  useEffect(() => {
-    if (!celebrate) return;
-
-    const timer = setTimeout(() => {
-      setCelebrate(false);
-    }, 4500);
-
-    return () => clearTimeout(timer);
-  }, [celebrate]);
-
-  const handleCelebrate = () => {
-    setCelebrate(false);
-
-    setTimeout(() => {
-      setCelebrate(true);
-    }, 50);
-  };
-
+function FinalSection() {
   return (
-    <main className="birthday-page">
-
-      {/* Floating hearts */}
-      <FloatingHearts />
-
-      {/* Celebration confetti */}
-      <Confetti active={celebrate} />
-
-      {/* ================= NAVBAR ================= */}
-      <nav className="birthday-nav">
-        <div className="logo">
-          <Cake size={22} />
-
-          <span>
-            Birthday<span>Girl</span>
-          </span>
-        </div>
-
-        <button
-          className={`music-btn ${
-            musicOn ? "active" : ""
-          }`}
-          onClick={() => setMusicOn(!musicOn)}
-        >
-          <Music size={17} />
-
-          {musicOn ? "Music On" : "Music"}
-        </button>
-      </nav>
-
-      {/* ================= HERO ================= */}
-      <BirthdayCard
-        onCelebrate={handleCelebrate}
-      />
-
-      {/* Scroll indicator */}
-      <div className="scroll-indicator">
-        <span>
-          Scroll for a little more love
-        </span>
-
-        <ArrowDown size={17} />
+    <section className="final-section">
+      <div className="final-stars">
+        <Star size={13} />
+        <Sparkles size={18} />
+        <Star size={13} />
       </div>
 
-      {/* ================= MEMORIES ================= */}
-      <Memories />
+      <div className="final-cat">
+        🐱
+      </div>
 
-      {/* ================= FINAL WISH ================= */}
-      <FinalWish />
+      <p className="final-top">
+        If you ever forget how special you are...
+      </p>
 
-      {/* ================= FOOTER ================= */}
-      <footer>
-        <Heart size={14} fill="currentColor" />
+      <h2>
+        Meri Pyari Dost,
+        <span>Billi.</span>
+      </h2>
 
-        Made with love for {FRIEND_NAME}
+      <p className="final-text">
+        Because someone somewhere thinks you're
+        pretty damn amazing exactly the way you are.
+      </p>
 
-        <Heart size={14} fill="currentColor" />
+      <div className="final-divider">
+        <span />
+        <Heart size={17} fill="currentColor" />
+        <span />
+      </div>
+
+      <div className="final-name">
+        {FRIEND_NAME}
+      </div>
+
+      <div className="final-tag">
+        my favourite billi • my good vibe • my person 🤍
+      </div>
+    </section>
+  );
+}
+
+/* =========================
+   MAIN
+========================= */
+
+export default function Birthday() {
+  return (
+    <main className="bestfriend-page">
+      <FloatingBilli />
+
+      <Navbar />
+
+      <Hero />
+
+      <BilliTraits />
+
+      <BilliCard />
+
+      <PersonalNote />
+
+      <FinalSection />
+
+      <footer className="bf-footer">
+        <Heart size={13} fill="currentColor" />
+
+        <span>
+          made specially for {FRIEND_NAME}
+        </span>
+
+        <Heart size={13} fill="currentColor" />
       </footer>
     </main>
   );
