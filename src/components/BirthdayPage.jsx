@@ -16,7 +16,7 @@ const kittyFallback =
 
 export default function BirthdayPage() {
   const [wished, setWished] = useState(false);
-  const [photo, setPhoto] = useState("/inaya.jpg");
+  const [photo, setPhoto] = useState("/inaya.png");
 
   function celebrate() {
     setWished(true);
